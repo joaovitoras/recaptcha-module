@@ -28,6 +28,11 @@ export interface ReCaptchaOptions {
    * Version
    */
   version: number
+
+  /**
+   * Disables ReCaptcha
+   */
+  disabled?: boolean
 }
 
 export interface ReCaptchaInstance {
@@ -68,8 +73,23 @@ export interface ReCaptchaInstance {
   render(reference: string, { siteKey, theme }: { siteKey: string, theme?: string }): number
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $recaptcha: ReCaptchaInstance
+interface PluginInjection {
+  recaptcha: ReCaptchaInstance
+}
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    ['recaptcha']?: Partial<ReCaptchaOptions>
   }
+  interface NuxtOptions {
+    ['recaptcha']?: ReCaptchaOptions
+  }
+}
+
+declare module '#app' {
+  interface NuxtApp extends PluginInjection { }
+}
+
+declare module 'vue' {
+  interface ComponentCustomProperties extends PluginInjection { }
 }

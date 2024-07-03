@@ -1,6 +1,6 @@
 import { defineNuxtModule, addPluginTemplate, createResolver, addComponent } from '@nuxt/kit'
 import { getContents } from './runtime/templates/plugin'
-import type { ReCaptchaOptions } from '~/types'
+import type { ReCaptchaOptions } from './../types'
 
 export interface ModuleOptions extends ReCaptchaOptions { }
 
@@ -10,7 +10,9 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'recaptcha',
   },
   defaults: {} as ModuleOptions,
-  setup(options, _nuxt) {
+  setup(options) {
+    if (options.disabled) return
+
     const resolver = createResolver(import.meta.url)
 
     addPluginTemplate({

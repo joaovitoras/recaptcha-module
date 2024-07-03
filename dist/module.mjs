@@ -7,7 +7,9 @@ const module = defineNuxtModule({
     configKey: "recaptcha"
   },
   defaults: {},
-  setup(options, _nuxt) {
+  setup(options) {
+    if (options.disabled)
+      return;
     const resolver = createResolver(import.meta.url);
     addPluginTemplate({
       getContents: () => getContents(options),
