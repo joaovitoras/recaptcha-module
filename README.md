@@ -13,7 +13,7 @@
 ## Setup
 
 1. Add `@nuxtjs/recaptcha` dependency with `yarn` or `npm` into your project
-2. Add `@nuxtjs/recaptcha` to `modules` section of `nuxt.config.js`
+2. Add `@nuxtjs/recaptcha` to `modules` section of `nuxt.config.ts`
 3. Configure it:
 
 ```js
@@ -64,10 +64,12 @@ using top level options
 ```js
 // nuxt.config.js
 export default {
-  publicRuntimeConfig: {
-    recaptcha: {
-      /* reCAPTCHA options */
-      siteKey: process.env.RECAPTCHA_SITE_KEY // for example
+  runtimeConfig: {
+    public: {
+      recaptcha: {
+        /* reCAPTCHA options */
+        siteKey: process.env.RECAPTCHA_SITE_KEY // for example
+      }
     }
   }
 }
@@ -83,13 +85,13 @@ For the `enterprise` mode, [use the Google Cloud Console](https://console.cloud.
 
 ### reCAPTCHA v2
 
-1. Add `<recaptcha>` component inside your form:
+1. Add `<RecaptchaNuxt>` component inside your form:
 
 ```vue
 <form @submit.prevent="onSubmit">
   <input autocomplete="true" placeholder="Email" type="email" v-model="email">
   <input autocomplete="current-password" placeholder="Password" type="password" v-model="password">
-  <recaptcha />
+  <RecaptchaNuxt />
   <button type="submit">Sign In</button>
 </form>
 ```
@@ -177,11 +179,36 @@ For example:
 </small>
 ```
 
-## Development
+## Contribution
 
-1. Clone this repository
-2. Install dependencies using `yarn install` or `npm install`
-3. Start development server using `npm run dev`
+<details>
+  <summary>Local development</summary>
+
+  ```bash
+  # Install dependencies
+  yarn install
+
+  # Generate type stubs
+  yarn dev:prepare
+
+  # Develop with the playground
+  yarn dev
+
+  # Build the playground
+  yarn dev:build
+
+  # Run ESLint
+  yarn lint
+
+  # Run Vitest
+  yarn test
+  yarn test:watch
+
+  # Release new version
+  yarn release
+  ```
+
+</details>
 
 ## License
 

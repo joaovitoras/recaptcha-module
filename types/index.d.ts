@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export interface ReCaptchaOptions {
   /**
    * Toggles badge element visibility (v3)
@@ -57,7 +55,7 @@ export interface ReCaptchaInstance {
   /**
    * Initialize ReCaptcha
    */
-  init(): Promise<any>
+  init(): Promise<unknown>
 
   /**
    * Reset ReCaptcha (v2)
@@ -67,7 +65,7 @@ export interface ReCaptchaInstance {
   /**
    * Render ReCaptcha (v2)
    */
-  render(reference: string, { siteKey, theme } : { siteKey: string, theme?: string }): number
+  render(reference: string, { siteKey, theme }: { siteKey: string, theme?: string }): number
 }
 
 declare module 'vue/types/vue' {
